@@ -40,7 +40,7 @@ jobs:
       # Step 4: Test the API using curl
       - name: Test the API endpoint
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" https://mlops-assignment-1-ten.vercel.app//api/predict)
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://mlops-assignment-1-psi.vercel.app/api/predict)
           if [ "$response" -ne 200 ]; then
             echo "API test failed with status code: $response"
             exit 1
