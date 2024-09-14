@@ -3,23 +3,52 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - main  # Only trigger the workflow for the main branch
 
 jobs:
-  deploy:
+  build_and_test:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Step 2: Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Step 3: Run tests (optional if you have local tests or unit tests for the API)
+      # Add any specific tests you'd like to run here
+      - name: Run unit tests
+        run: npm test
+
+  deploy_and_test:
+    runs-on: ubuntu-latest
+    needs: build_and_test
+
+    steps:
+      # Step 1: Checkout code again for the deployment job
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Deploy to Vercel
       - name: Deploy to Vercel
         env:
-          VERCEL_TOKEN: 12121212  # Replace with your actual token (already provided)
-        run: npx vercel --prod --token ${{ env.VERCEL_TOKEN }}
+          VERCEL_TOKEN: 12121212  # GitHub Secret for Vercel Token
+        run: npx vercel --prod --token 12121212
 
-      - name: Test the API
+      # Step 3: Wait for the deployment to finish (you may skip this, as Vercel's deployment is usually fast)
+      - name: Wait for Deployment
+        run: sleep 30  # Optional, wait for 30 seconds to ensure deployment is live
+
+      # Step 4: Test the API using curl
+      - name: Test the API endpoint
         run: |
-          curl -X GET https://your-vercel-app-url/api/predict
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://your-vercel-app-url/api/predict)
+          if [ "$response" -ne 200 ]; then
+            echo "API test failed: $response"
+            exit 1
+          else
+            echo "API test passed!"
+          fi
