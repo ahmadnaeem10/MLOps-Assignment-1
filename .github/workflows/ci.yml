@@ -14,14 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 3: Run unit tests
-      # If you don't have unit tests, skip this step
-      - name: Run unit tests
-        run: npm test
+      # Step 2: (Optional) Any other build or preparation steps can be added here
+      # If you have any additional setup, you can add it here
 
   deploy_and_test:
     runs-on: ubuntu-latest
@@ -46,10 +40,9 @@ jobs:
       # Step 4: Test the API using curl
       - name: Test the API endpoint
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" https://your-vercel-app-url/api/predict)
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://mlops-assignment-1-ten.vercel.app//api/predict)
           if [ "$response" -ne 200 ]; then
             echo "API test failed with status code: $response"
             exit 1
           else:
             echo "API test passed with status code: $response"
-          fi
