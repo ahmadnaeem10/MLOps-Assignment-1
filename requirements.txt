@@ -1,6 +1,6 @@
-pandas
-numpy
-scikit-learn
 flask
-joblib
-matplotlib
+pandas
+pytest
+flake8
+pylint
+vercel
