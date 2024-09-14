@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            margin: 10px 0;
+        }
+        input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="number"]:focus, input[type="submit"]:hover {
+            border-color: #0056b3;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        p {
+            color: #007bff;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <h1>House Price Predictor</h1>
+    <form action="/" method="post">
+        <label for="overallQual">Overall Quality (1-10):
+            <input type="number" id="overallQual" name="overallQual" min="1" max="10" required>
+        </label>
+        <label for="exterQual">Exterior Quality (1-5):
+            <input type="number" id="exterQual" name="exterQual" min="1" max="5" required>
+        </label>
+        <label for="bsmtQual">Basement Quality (1-5):
+            <input type="number" id="bsmtQual" name="bsmtQual" min="1" max="5" required>
+        </label>
+        <label for="totalBsmtSF">Total Basement Area (sq ft):
+            <input type="number" id="totalBsmtSF" name="totalBsmtSF" min="0" required>
+        </label>
+        <label for="1stFlrSF">First Floor Area (sq ft):
+            <input type="number" id="1stFlrSF" name="1stFlrSF" min="0" required>
+        </label>
+        <label for="grLivArea">Above Grade Living Area (sq ft):
+            <input type="number" id="grLivArea" name="grLivArea" min="0" required>
+        </label>
+        <label for="garageCars">Number of Cars in Garage:
+            <input type="number" id="garageCars" name="garageCars" min="0" required>
+        </label>
+        <label for="garageArea">Garage Area (sq ft):
+            <input type="number" id="garageArea" name="garageArea" min="0" required>
+        </label>
+        <input type="submit" value="Predict">
+        <p>{{ prediction_text }}</p>
+    </form>
+</body>
+</html>
