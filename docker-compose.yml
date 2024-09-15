@@ -1,28 +1,12 @@
 version: '3'
 
 services:
-  dev:
+  app:
     build: .
     ports:
       - "5000:5000"
-    environment:
-      - FLASK_ENV=development
     volumes:
       - .:/app
-    command: python main.py
-
-  stage:
-    build: .
-    ports:
-      - "5001:5001"
     environment:
-      - FLASK_ENV=staging
-    command: python main.py
-
-  prod:
-    build: .
-    ports:
-      - "5002:5002"
-    environment:
-      - FLASK_ENV=production
-    command: python main.py
+      - FLASK_ENV=development
+    command: python app.py
