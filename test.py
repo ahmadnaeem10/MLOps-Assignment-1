@@ -1,9 +1,10 @@
 import unittest
-from flask import Flask
-import app
 import numpy as np
 import pandas as pd
 import warnings
+from flask import Flask
+import app
+
 
 class FlaskTestCase(unittest.TestCase):
     # Ensure Flask app is created
@@ -62,6 +63,7 @@ class FlaskTestCase(unittest.TestCase):
                 prediction = app.model.predict(input_features_scaled)
                 self.assertIsInstance(prediction, np.ndarray)
                 self.assertGreater(prediction[0], 0)  # Assuming house prices cannot be zero or negative
+
 
 if __name__ == '__main__':
     unittest.main()
