@@ -8,6 +8,7 @@ app = Flask(__name__)
 model = joblib.load('house_price_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -29,6 +30,7 @@ def index():
         except Exception as e:
             return render_template('index.html', prediction_text=f'Error: {str(e)}')
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

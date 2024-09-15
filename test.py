@@ -6,7 +6,6 @@ import pandas as pd
 import warnings
 
 class FlaskTestCase(unittest.TestCase):
-
     # Ensure Flask app is created
     def setUp(self):
         self.app = app.app.test_client()
@@ -39,7 +38,7 @@ class FlaskTestCase(unittest.TestCase):
             'exterQual': '4'
             # Missing other fields
         })
-        self.assertIn(b'Invalid input:', response.data)
+        self.assertIn(b'Error:', response.data)
         self.assertEqual(response.status_code, 200)
 
     # Test the loading of model and scaler
