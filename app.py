@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template
 import joblib
 import numpy as np
 
@@ -27,7 +27,7 @@ def index():
             predicted_price = round(prediction[0], 2)
             return render_template('index.html', prediction_text=f'Estimated House Price: ${predicted_price}')
         except Exception as e:
-            return render_template('index.html', prediction_text=f'Invalid input: {e}')
+            return render_template('index.html', prediction_text=f'Error: {str(e)}')
     return render_template('index.html')
 
 if __name__ == '__main__':

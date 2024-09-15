@@ -3,4 +3,5 @@ pandas
 pytest
 flake8
 pylint
-vercel
+joblib
+numpy

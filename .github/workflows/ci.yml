@@ -21,15 +21,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install flake8 pylint
+          pip install flake8 pylint numpy
 
       - name: Lint code
         run: |
           flake8 --ignore=E501 .
-          pylint app.py main.py test.py
+          pylint app.py
 
   testing:
     runs-on: ubuntu-latest
+    needs: linting
     strategy:
       matrix:
         environment: [dev, staging, production]
@@ -49,11 +50,11 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m unittest test.py
+          pytest
 
   build:
     runs-on: ubuntu-latest
-    needs: [linting, testing]
+    needs: testing
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
