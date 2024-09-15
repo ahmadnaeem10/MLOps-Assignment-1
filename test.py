@@ -2,7 +2,6 @@ import unittest
 import numpy as np
 import pandas as pd
 import warnings
-from flask import Flask
 import app
 
 
